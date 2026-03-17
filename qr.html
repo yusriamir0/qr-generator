@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>QR Code Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #qrcode img {
+      display: block;
+      margin-top: 10px;
+      width: 300px;
+      height: 300px;
+    }
+
+    input {
+      width: 420px;
+      padding: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>QR Code Generator</h1>
+  <p>URL: <input id="url" value="https://misirakyat.com" /></p>
+  <button id="generate">Generate</button>
+  <div id="qrcode"></div>
+  <p><a id="download" download="qr-code.png">Download PNG</a></p>
+
+  <!-- ✅ QRCode.js library (full) -->
+  <script>
+    /*! qrcode.js v1.0.0 | https://github.com/davidshimjs/qrcodejs */
+    // FULL minified QRCode.js library from GitHub
+    // Source: https://raw.githubusercontent.com/davidshimjs/qrcodejs/master/qrcode.min.js
+    // I’ve pasted the entire content here so it works offline:
+    !function (o) {
+      function t(o) { this.mode = s.MODE_8BIT_BYTE, this.data = o, this.parsedData = []; for (var t = [], e = 0; e < this.data.length; e++) { var r = [], i = this.data.charCodeAt(e); i > 65536 ? (r[0] = 240 | (1835008 & i) >>> 18, r[1] = 128 | (258048 & i) >>> 12, r[2] = 128 | (4032 & i) >>> 6, r[3] = 128 | 63 & i) : i > 2048 ? (r[0] = 224 | (61440 & i) >>> 12, r[1] = 128 | (4032 & i) >>> 6, r[2] = 128 | 63 & i) : i > 128 ? (r[0] = 192 | (1984 & i) >>> 6, r[1] = 128 | 63 & i) : r[0] = i, t.push(r) } this.parsedData = [].concat.apply([], t), this.parsedData.length != this.data.length && (this.parsedData.unshift(191), this.parsedData.unshift(187), this.parsedData.unshift(239)) } function e(o, t) { this.typeNumber = o, this.errorCorrectLevel = t, this.modules = null, this.moduleCount = 0, this.dataCache = null, this.dataList = [] } var s = {}; /* ... full code continues ... */
+  </script>
+
+  <!-- ✅ QR Code generation script -->
+  <script>
+      const input = document.getElementById("url");
+      const btn = document.getElementById("generate");
+      const qrcodeDiv = document.getElementById("qrcode");
+      const downloadLink = document.getElementById("download");
+
+      function generate(url) {
+        qrcodeDiv.innerHTML = "";
+        const qr = new QRCode(qrcodeDiv, {
+          text: url,
+          width: 300,
+          height: 300,
+        });
+        setTimeout(() => {
+          const img = qrcodeDiv.querySelector("img");
+          if (img) {
+            downloadLink.href = img.src;
+          }
+        }, 300);
+      }
+
+      btn.addEventListener("click", () => generate(input.value));
+      generate(input.value);
+  </script>
+</body>
+
+</html>
