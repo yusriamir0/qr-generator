@@ -1,4 +1,4 @@
-# QR Code Generator — misirakyat.com
+# QR Code Generator 
 
 A simple and efficient QR Code Generator supporting both a web-based interface and a Node.js CLI utility.
 
